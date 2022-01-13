@@ -88,6 +88,22 @@ const registerUser = (registerCredentials) => {
       handleHttpErrors
     );
   };
+
+   const addDinnerEvent = (dinnerEvent) => {
+     const options = makeOptions("POST", true, dinnerEvent);
+     return fetch(URL + "/api/admin/addDinnerEvent", options).then(
+       handleHttpErrors
+     );
+   };
+
+    const getAllEvents = () => {
+      const options = makeOptions("GET", true); //True add's the token
+      return fetch(URL + "/api/all/getAllEvents", options).then(
+        handleHttpErrors
+      );
+    };
+
+
   const makeOptions = (method, addToken, body) => {
     var opts = {
       method: method,
@@ -119,7 +135,9 @@ const registerUser = (registerCredentials) => {
     fetchAlotDataParallel,
     validateAccess,
     handleError,
-    registerUser
+    registerUser,
+    addDinnerEvent,
+    getAllEvents,
   };
 }
 const facade = apiFacade();

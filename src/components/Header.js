@@ -34,11 +34,19 @@ function Header({ loggedIn, logout, validateAccess }) {
           )}
 
           {validateAccess === "admin" ? (
+            <>
             <li>
-              <NavLink exact activeClassName="active" to="/fetch-parallelly">
-                Fetch parallelly
+              <NavLink exact activeClassName="active" to="/add-event">
+                Add Event
               </NavLink>
-            </li>
+              </li>
+              <li>
+                <NavLink exact activeClassName="active" to="/overview">
+                  Overview
+                </NavLink>
+              </li>
+            
+            </>
           ) : (
             ""
           )}

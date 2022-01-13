@@ -12,9 +12,11 @@ import Header from "./Header";
 import Home from "./Home";
 import FetchSingle from "./FetchSingle";
 import FetchSequentially from "./FetchSequentially";
-import FetchParallel from "./FetchParallelly";
-import FetchParallelly from "./FetchParallelly";
+import FetchParallel from "./AddEvent";
+import FetchParallelly from "./AddEvent";
 import NoMatch from "./NoMatch";
+import AddEvent from "./AddEvent";
+import Overview from "./Overview";
 
 function UserHeader(props) {
   const { loggedIn, logout, validateAccess } = props;
@@ -41,8 +43,15 @@ function UserHeader(props) {
           ""
         )}
         {validateAccess === "admin" ? (
-          <Route path="/fetch-parallelly">
-            <FetchParallelly />
+          <Route path="/add-event">
+            <AddEvent />
+          </Route>
+        ) : (
+          ""
+        )}
+        {validateAccess === "admin" ? (
+          <Route path="/overview">
+            <Overview />
           </Route>
         ) : (
           ""
