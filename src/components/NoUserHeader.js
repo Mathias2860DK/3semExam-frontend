@@ -67,8 +67,7 @@ const [showRegisterError, setShowRegisterError] = useState(false);
           <Container>
             <Row className="rows">
               <Col sm={5} className="columns main-left">
-                <h1 className="text-center mt-3">Exam</h1>
-                <p>Skriv din beskrivelse her. Add evt billede</p>
+          
               </Col>
               <Col className="columns login-form">
                 <h1 className="text-center">Login</h1>
@@ -165,9 +164,7 @@ const [showRegisterError, setShowRegisterError] = useState(false);
             ""
           )}
         </Route>
-        {/* <Route path="/fetch-single">
-          <FetchSingle />
-        </Route> */}
+       
         <Route path="*">
           <NoMatch />
         </Route>

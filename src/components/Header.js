@@ -9,12 +9,6 @@ function Header({ loggedIn, logout, validateAccess }) {
           Home
         </NavLink>
       </li>
-
-      <li>
-        <NavLink exact activeClassName="active" to="/fetch-single">
-          FetchSingle
-        </NavLink>
-      </li>
       {!loggedIn ? (
         <li>
           <NavLink exact activeClassName="active" to="/login">
@@ -24,28 +18,34 @@ function Header({ loggedIn, logout, validateAccess }) {
       ) : (
         <>
           {validateAccess === "user" ? (
-            <li>
-              <NavLink exact activeClassName="active" to="/fetch-sequentially">
-                Fetch sequentially
-              </NavLink>
-            </li>
+            <>
+              <li>
+                <NavLink exact activeClassName="active" to="/account">
+                  Account
+                </NavLink>
+              </li>
+              <li>
+                <NavLink exact activeClassName="active" to="/all-events">
+                  All Events
+                </NavLink>
+              </li>
+            </>
           ) : (
             ""
           )}
 
           {validateAccess === "admin" ? (
             <>
-            <li>
-              <NavLink exact activeClassName="active" to="/add-event">
-                Add Event
-              </NavLink>
+              <li>
+                <NavLink exact activeClassName="active" to="/add-event">
+                  Add Event
+                </NavLink>
               </li>
               <li>
                 <NavLink exact activeClassName="active" to="/overview">
                   Overview
                 </NavLink>
               </li>
-            
             </>
           ) : (
             ""

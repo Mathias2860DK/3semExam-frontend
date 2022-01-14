@@ -14,11 +14,11 @@ function Home() {
             </h3>
             
             <p>
-              <strong>User</strong> : Home, FetchSingle, FetchSequentially and
+              <strong>User</strong> : Home, Account, All Events and
               Logout
             </p>
             <p>
-              <strong>Admin</strong>: Home, Add Event, FetchParallel and
+              <strong>Admin</strong>: Home, Add Event, Overview and
               Logout
             </p>
             <br></br>

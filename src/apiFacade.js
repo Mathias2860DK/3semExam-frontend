@@ -37,6 +37,14 @@ function apiFacade() {
     return roles;
   };
 
+  const getUserName = () => {
+    var decoded = jwt_decode(getToken());
+    const { username } = decoded;
+    console.log(username);
+    //  console.log(decoded);
+    return username;
+  };
+
   const loggedIn = () => {
     const loggedIn = getToken() != null;
     return loggedIn;
@@ -58,51 +66,76 @@ function apiFacade() {
       });
   };
 
-const registerUser = (registerCredentials) => {
-     const options = makeOptions('POST',true,registerCredentials);
-     console.log(registerCredentials)
-     return fetch(URL + "/api/register", options)
-       .then(handleHttpErrors)
-       .then((res) => {});
-   }
-
-  const fetchData = () => {
-    const options = makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
+  const registerUser = (registerCredentials) => {
+    const options = makeOptions("POST", true, registerCredentials);
+    console.log(registerCredentials);
+    return fetch(URL + "/api/register", options)
+      .then(handleHttpErrors)
+      .then((res) => {});
   };
 
-  //Fetches from one endpoint. Only 1 external api call.
-  const fetchSingleData = () => {
-    const options = makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/info/fetchSingle", options).then(handleHttpErrors);
-  };
-  //Fetches from one endpoint. 4 external api call.
-  const fetchAlotData = () => {
-    const options = makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/info/fetchSeq", options).then(handleHttpErrors);
-  };
 
-  const fetchAlotDataParallel = () => {
-    const options = makeOptions("GET", true); //True add's the token
-    return fetch(URL + "/api/info/fetchParallel", options).then(
+
+  
+
+  const addDinnerEvent = (dinnerEvent) => {
+    const options = makeOptions("POST", true, dinnerEvent);
+    return fetch(URL + "/api/admin/addDinnerEvent", options).then(
       handleHttpErrors
     );
   };
 
-   const addDinnerEvent = (dinnerEvent) => {
-     const options = makeOptions("POST", true, dinnerEvent);
-     return fetch(URL + "/api/admin/addDinnerEvent", options).then(
-       handleHttpErrors
-     );
+  const getAllEvents = () => {
+    const options = makeOptions("GET", true); //True add's the token
+    return fetch(URL + "/api/all/getAllEvents", options).then(handleHttpErrors);
+  };
+  const getAllTransactions = (userName) => {
+    const options = makeOptions("GET", true); //True add's the token
+    return fetch(
+      URL + "/api/all/getAllTransactionsById/" + userName,
+      options
+    ).then(handleHttpErrors);
+  };
+
+  //Add yourself
+  const addMemberToEvent = (eventId, assignment) => {
+    const options = makeOptions("PUT", true, assignment);
+    return fetch(URL + "/api/all/addMemberToEvent/" + eventId, options).then(
+      handleHttpErrors
+    );
+  };
+
+  //add other members
+  const addMembersToEvent = (eventId, assignment) => {
+    const options = makeOptions("PUT", true, assignment);
+    return fetch(URL + "/api/all/addMembersToEvent/" + eventId, options).then(
+      handleHttpErrors
+    );
+  };
+
+  const getAccountBalance = (userName) => {
+    const options = makeOptions("GET", true); //True add's the token
+    return fetch(URL + "/api/all/getAccountBalance/" + userName, options).then(
+      handleHttpErrors
+    );
+  };
+
+  //getAllEventsByUser
+  const getAllEventsByUser = (userName) => {
+    const options = makeOptions("GET", true); //True add's the token
+    return fetch(URL + "/api/all/getAllEventsByUser/" + userName, options).then(
+      handleHttpErrors
+    );
+  };
+
+   const getAllMembersAssignedToEvent = (eventId) => {
+     const options = makeOptions("GET", true);
+     return fetch(
+       URL + "/api/all/getAllMembersAssignedToEvent/" + eventId,
+       options
+     ).then(handleHttpErrors);
    };
-
-    const getAllEvents = () => {
-      const options = makeOptions("GET", true); //True add's the token
-      return fetch(URL + "/api/all/getAllEvents", options).then(
-        handleHttpErrors
-      );
-    };
-
+  //getAllMembersAssignedToEvent
 
   const makeOptions = (method, addToken, body) => {
     var opts = {
@@ -129,15 +162,18 @@ const registerUser = (registerCredentials) => {
     loggedIn,
     login,
     logout,
-    fetchData,
-    fetchSingleData,
-    fetchAlotData,
-    fetchAlotDataParallel,
     validateAccess,
     handleError,
     registerUser,
     addDinnerEvent,
     getAllEvents,
+    addMemberToEvent,
+    getUserName,
+    getAllTransactions,
+    getAccountBalance,
+    getAllEventsByUser,
+    addMembersToEvent,
+    getAllMembersAssignedToEvent,
   };
 }
 const facade = apiFacade();

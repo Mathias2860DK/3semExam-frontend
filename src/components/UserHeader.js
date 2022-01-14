@@ -7,16 +7,13 @@ import {
   NavLink,
 } from "react-router-dom";
 
-import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Home from "./Home";
-import FetchSingle from "./FetchSingle";
-import FetchSequentially from "./FetchSequentially";
-import FetchParallel from "./AddEvent";
-import FetchParallelly from "./AddEvent";
 import NoMatch from "./NoMatch";
 import AddEvent from "./AddEvent";
 import Overview from "./Overview";
+import OverviewForUsers from "./OverviewForUsers";
+import Account from "./Account";
 
 function UserHeader(props) {
   const { loggedIn, logout, validateAccess } = props;
@@ -31,13 +28,17 @@ function UserHeader(props) {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/fetch-single">
-          <FetchSingle />
-        </Route>
 
         {validateAccess === "user" ? (
-          <Route path="/fetch-sequentially">
-            <FetchSequentially />
+          <Route path="/all-events">
+            <OverviewForUsers />
+          </Route>
+        ) : (
+          ""
+        )}
+        {validateAccess === "user" ? (
+          <Route path="/account">
+            <Account />
           </Route>
         ) : (
           ""
